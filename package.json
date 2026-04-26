@@ -1,0 +1,10 @@
+{
+  "name": "premium-diagrams",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "start": "python3 -m http.server 4173"
+  }
+}
