@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react";
+
 const pillars = [
   {
     title: "Workspace unificado",
@@ -52,6 +54,42 @@ const activity = [
   "Pipeline de facturacion desplegado en staging"
 ];
 
+const navigationItems = [
+  "Overview",
+  "Infraestructura",
+  "Base de datos",
+  "Usuarios",
+  "Seguridad"
+];
+
+const sectionDetails = {
+  Overview: {
+    title: "Centro operativo en tiempo real",
+    description:
+      "Monitorea flujos, salud del sistema y actividad reciente desde un solo tablero."
+  },
+  Infraestructura: {
+    title: "Infraestructura y despliegues",
+    description:
+      "Sigue pipelines de cloud, estado de entornos y capacidad operativa."
+  },
+  "Base de datos": {
+    title: "Estado de datos y replicas",
+    description:
+      "Controla sincronizacion, almacenamiento y trazabilidad de la capa de datos."
+  },
+  Usuarios: {
+    title: "Accesos, roles y actividad",
+    description:
+      "Gestiona usuarios activos, permisos y aprobaciones de sesiones sensibles."
+  },
+  Seguridad: {
+    title: "Alertas y proteccion",
+    description:
+      "Revisa aprobaciones, eventos recientes y focos de riesgo del sistema."
+  }
+};
+
 function MonitorIcon() {
   return (
     <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -104,6 +142,14 @@ function SignalGrid() {
 }
 
 export default function App() {
+  const [activeSection, setActiveSection] = useState("Overview");
+  const [showFlowComposer, setShowFlowComposer] = useState(false);
+  const [draftCount, setDraftCount] = useState(3);
+  const activeContent = useMemo(
+    () => sectionDetails[activeSection],
+    [activeSection]
+  );
+
   return (
     <main className="app-shell">
       <section className="hero-panel">
@@ -223,13 +269,25 @@ export default function App() {
         <div className="workspace-header">
           <div>
             <p className="eyebrow">Tablero de trabajo</p>
-            <h2>Centro operativo en tiempo real</h2>
+            <h2>{activeContent.title}</h2>
+            <p className="workspace-copy">{activeContent.description}</p>
           </div>
           <div className="workspace-actions">
-            <button type="button" className="ghost-action">
+            <button
+              type="button"
+              className="ghost-action"
+              onClick={() => setActiveSection("Overview")}
+            >
               Exportar
             </button>
-            <button type="button" className="solid-action">
+            <button
+              type="button"
+              className="solid-action"
+              onClick={() => {
+                setShowFlowComposer((current) => !current);
+                setDraftCount((current) => current + 1);
+              }}
+            >
               Nuevo flujo
             </button>
           </div>
@@ -239,21 +297,18 @@ export default function App() {
           <aside className="workspace-sidebar">
             <div className="sidebar-block">
               <span className="sidebar-label">Navegacion</span>
-              <button type="button" className="sidebar-item active">
-                Overview
-              </button>
-              <button type="button" className="sidebar-item">
-                Infraestructura
-              </button>
-              <button type="button" className="sidebar-item">
-                Base de datos
-              </button>
-              <button type="button" className="sidebar-item">
-                Usuarios
-              </button>
-              <button type="button" className="sidebar-item">
-                Seguridad
-              </button>
+              {navigationItems.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  className={`sidebar-item ${
+                    activeSection === item ? "active" : ""
+                  }`}
+                  onClick={() => setActiveSection(item)}
+                >
+                  {item}
+                </button>
+              ))}
             </div>
 
             <div className="sidebar-block">
@@ -272,6 +327,32 @@ export default function App() {
           </aside>
 
           <div className="workspace-main">
+            {showFlowComposer ? (
+              <section className="composer-card" aria-label="Nuevo flujo">
+                <div className="board-head">
+                  <div>
+                    <p className="board-label">Nuevo flujo</p>
+                    <h3>Flow draft #{draftCount}</h3>
+                  </div>
+                  <span className="board-chip">Draft</span>
+                </div>
+                <div className="composer-grid">
+                  <article className="composer-step">
+                    <strong>1. Selecciona modulo</strong>
+                    <span>{activeSection}</span>
+                  </article>
+                  <article className="composer-step">
+                    <strong>2. Define responsables</strong>
+                    <span>Infra · Data · Security</span>
+                  </article>
+                  <article className="composer-step">
+                    <strong>3. Estado inicial</strong>
+                    <span>Listo para aprobacion</span>
+                  </article>
+                </div>
+              </section>
+            ) : null}
+
             <div className="workspace-kpis">
               {workspaceStats.map((item) => (
                 <article key={item.label} className="kpi-card">
@@ -286,8 +367,12 @@ export default function App() {
               <section className="board-card board-card-large">
                 <div className="board-head">
                   <div>
-                    <p className="board-label">Pipeline</p>
-                    <h3>Flujos prioritarios</h3>
+                    <p className="board-label">{activeSection}</p>
+                    <h3>
+                      {activeSection === "Overview"
+                        ? "Flujos prioritarios"
+                        : `Vista de ${activeSection}`}
+                    </h3>
                   </div>
                   <span className="board-chip">Live sync</span>
                 </div>
@@ -327,8 +412,9 @@ export default function App() {
                   <span>DV</span>
                 </div>
                 <p className="board-note">
-                  Roles auditados, sesiones activas y permisos listos para
-                  aprobacion.
+                  {activeSection === "Usuarios"
+                    ? "La navegacion ya cambia esta vista y prioriza accesos, sesiones y responsables."
+                    : "Roles auditados, sesiones activas y permisos listos para aprobacion."}
                 </p>
               </section>
 
@@ -348,7 +434,9 @@ export default function App() {
                   <span style={{ height: "69%" }} />
                 </div>
                 <p className="board-note">
-                  Replicacion, snapshots y consumo en una sola superficie.
+                  {activeSection === "Base de datos"
+                    ? "Esta vista queda enfocada en replicas, snapshots y consumo de storage."
+                    : "Replicacion, snapshots y consumo en una sola superficie."}
                 </p>
               </section>
 
