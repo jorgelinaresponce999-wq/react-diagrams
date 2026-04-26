@@ -468,6 +468,12 @@ body {
   line-height: 0.98;
 }
 
+.workspace-copy {
+  margin: 10px 0 0;
+  max-width: 58ch;
+  color: rgba(238, 244, 255, 0.68);
+}
+
 .workspace-actions {
   gap: 12px;
 }
@@ -579,6 +585,38 @@ body {
   flex: 1;
   display: grid;
   gap: 18px;
+}
+
+.composer-card {
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(165, 197, 255, 0.14);
+  background:
+    linear-gradient(145deg, rgba(97, 160, 255, 0.14), rgba(126, 241, 210, 0.08)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.composer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.composer-step {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(165, 197, 255, 0.12);
+  background: rgba(6, 17, 32, 0.18);
+}
+
+.composer-step strong,
+.composer-step span {
+  display: block;
+}
+
+.composer-step span {
+  margin-top: 8px;
+  color: rgba(238, 244, 255, 0.68);
 }
 
 .workspace-kpis {
@@ -797,6 +835,10 @@ body {
   .workspace-layout,
   .workspace-kpis {
     flex-direction: column;
+  }
+
+  .composer-grid {
+    grid-template-columns: 1fr;
   }
 
   .workspace-sidebar {
