@@ -1,39 +1,32 @@
 # React Diagrams
 
-Editor visual para crear diagramas de red, flujo y arquitectura con una estetica premium blanca.
+Base convertida a React + Vite con una interfaz premium de estilo producto.
 
 ## Incluye
 
-- plantillas base para `network`, `flow` y `architecture`
-- nodos arrastrables
-- conexiones visuales entre nodos
-- panel lateral para editar propiedades
-- interfaz limpia tipo white premium workspace
+- estructura real con `React` y `Vite`
+- hero visual premium con look SaaS
+- iconos integrados de PC, base de datos y usuarios
+- configuracion lista para Vercel
+- base preparada para seguir creciendo como producto
 
-## Como verlo en tu PC
-
-### Opcion 1: servidor rapido con Python
+## Scripts
 
 ```bash
-git clone https://github.com/jorgelinaresponce999-wq/react-diagrams.git
-cd react-diagrams
-python -m http.server 4173
+npm install
+npm run dev
+npm run build
+npm run preview
 ```
 
-Luego abre:
+## Despliegue en Vercel
+
+El repo ya incluye `vercel.json` con la salida en `dist`.
 
 ```bash
-http://localhost:4173
+npx vercel --prod
 ```
 
-### Opcion 2: con Node
+## Nota
 
-```bash
-git clone https://github.com/jorgelinaresponce999-wq/react-diagrams.git
-cd react-diagrams
-npx serve .
-```
-
-## Nota tecnica
-
-Este proyecto usa React por modulos ESM desde CDN para evitar depender de instalacion local de paquetes. Para abrirlo bien, debes servirlo con un servidor local y no abrir `index.html` directo con doble clic.
+En esta sesion el entorno no permitio instalar dependencias desde npm, pero la estructura del proyecto y los archivos del frontend ya quedaron publicados en GitHub.
