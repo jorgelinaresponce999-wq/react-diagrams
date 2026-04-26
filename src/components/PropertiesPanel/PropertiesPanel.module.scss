@@ -1,0 +1,104 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.panel {
+  display: grid;
+  align-content: start;
+}
+
+.card {
+  @include surface;
+  padding: 1rem;
+  border-radius: 1.6rem;
+}
+
+.kicker {
+  margin: 0 0 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  color: $color-text-soft;
+}
+
+.selectionHead {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  p {
+    color: $color-text-muted;
+    font-size: 0.82rem;
+  }
+}
+
+.selectionIcon,
+.connectionSwatch {
+  width: 2.3rem;
+  height: 2.3rem;
+  padding: 0.45rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(162, 193, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.connectionSwatch {
+  background: linear-gradient(135deg, $color-accent, $color-accent-soft);
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 0.9rem;
+
+  span {
+    color: $color-text-muted;
+    font-size: 0.82rem;
+  }
+
+  input,
+  textarea,
+  select {
+    border: 1px solid rgba(162, 193, 255, 0.14);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: $color-text;
+    padding: 0.75rem 0.85rem;
+  }
+
+  input[type="color"] {
+    padding: 0.25rem;
+    min-height: 2.7rem;
+  }
+}
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: $color-text-muted;
+  margin-bottom: 1rem;
+}
+
+.dangerButton {
+  @include subtle-button;
+  width: 100%;
+  color: #ffb5c1;
+}
+
+.emptyCopy {
+  color: $color-text-muted;
+  line-height: 1.5;
+}
+

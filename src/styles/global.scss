@@ -1,0 +1,52 @@
+@use "./variables" as *;
+
+:root {
+  color-scheme: dark;
+  font-family: "Trebuchet MS", "Helvetica Neue", Arial, sans-serif;
+  color: $color-text;
+  background:
+    radial-gradient(circle at top left, rgba(89, 146, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 82% 12%, rgba(96, 236, 198, 0.12), transparent 18%),
+    linear-gradient(160deg, $color-bg-start 0%, #0c1627 44%, $color-bg-end 100%);
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+

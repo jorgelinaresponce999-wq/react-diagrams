@@ -1,0 +1,43 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.canvas {
+  position: relative;
+  overflow: hidden;
+  min-height: 72vh;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(162, 193, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
+    rgba(6, 12, 24, 0.82);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(160, 186, 243, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160, 186, 243, 0.11) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+
+.viewport {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+}
+
+.connections {
+  position: absolute;
+  inset: 0;
+  width: 1600px;
+  height: 1200px;
+  overflow: visible;
+  pointer-events: none;
+
+  path,
+  text {
+    pointer-events: auto;
+  }
+}
+

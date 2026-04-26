@@ -1,0 +1,34 @@
+@use "./variables" as *;
+
+@mixin surface {
+  border: 1px solid $color-border;
+  background: $color-surface;
+  box-shadow:
+    $color-shadow,
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+@mixin subtle-button {
+  border: 1px solid rgba(162, 193, 255, 0.14);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: $color-text;
+  padding: 0.78rem 0.92rem;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@mixin primary-button {
+  @include subtle-button;
+  color: #061120;
+  background: linear-gradient(135deg, $color-accent, $color-accent-soft);
+}
+

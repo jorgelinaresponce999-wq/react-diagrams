@@ -1,0 +1,74 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.sidebar {
+  @include surface;
+  padding: 1rem;
+  border-radius: 1.6rem;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.header {
+  display: grid;
+  gap: 0.25rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  span {
+    color: $color-text-muted;
+    font-size: 0.84rem;
+  }
+}
+
+.kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  color: $color-text-soft;
+}
+
+.kindBadge {
+  justify-self: start;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  color: #061120;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, $color-accent, $color-accent-soft);
+  text-transform: capitalize;
+}
+
+.list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.libraryItem {
+  @include subtle-button;
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  text-align: left;
+
+  strong {
+    display: block;
+  }
+
+  span {
+    color: $color-text-muted;
+    font-size: 0.8rem;
+  }
+}
+
+.icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
