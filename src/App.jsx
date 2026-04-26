@@ -34,6 +34,24 @@ const modules = [
   "Automatizaciones"
 ];
 
+const workspaceStats = [
+  { value: "128", label: "tickets activos", trend: "+12%" },
+  { value: "86%", label: "automatizacion", trend: "+4%" },
+  { value: "14", label: "alertas criticas", trend: "-8%" }
+];
+
+const pipelines = [
+  { name: "Provisioning cloud", status: "Live", owner: "Infra", progress: 82 },
+  { name: "Replica de datos", status: "Stable", owner: "Data", progress: 64 },
+  { name: "Accesos enterprise", status: "Review", owner: "IAM", progress: 48 }
+];
+
+const activity = [
+  "Database cluster sincronizado hace 2 min",
+  "Nuevo usuario admin aprobado por seguridad",
+  "Pipeline de facturacion desplegado en staging"
+];
+
 function MonitorIcon() {
   return (
     <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -99,9 +117,9 @@ export default function App() {
           </div>
 
           <nav className="topnav" aria-label="Principal">
-            <a href="#modules">Modulos</a>
+            <a href="#workspace">Tablero</a>
             <a href="#signals">Senales</a>
-            <a href="#signals">Equipos</a>
+            <a href="#modules">Modulos</a>
           </nav>
         </header>
 
@@ -110,14 +128,14 @@ export default function App() {
             <p className="eyebrow">React + Vite premium</p>
             <h1>Una interfaz con presencia de producto real.</h1>
             <p className="lead">
-              Ahora la base se ve como una plataforma moderna: mas jerarquia,
-              mejor densidad visual y un lenguaje premium con iconos de PC,
-              datos y usuarios integrados en la experiencia.
+              Ahora la base no solo tiene portada: incluye una superficie de
+              trabajo clara, con modulos, panel operativo y lenguaje visual
+              premium con iconos de PC, datos y usuarios.
             </p>
 
             <div className="hero-actions">
-              <a className="primary-action" href="#signals">
-                Ver experiencia
+              <a className="primary-action" href="#workspace">
+                Abrir tablero
               </a>
               <a className="secondary-action" href="#modules">
                 Explorar modulos
@@ -198,6 +216,158 @@ export default function App() {
               </div>
             </div>
           </section>
+        </div>
+      </section>
+
+      <section className="workspace-panel" id="workspace">
+        <div className="workspace-header">
+          <div>
+            <p className="eyebrow">Tablero de trabajo</p>
+            <h2>Centro operativo en tiempo real</h2>
+          </div>
+          <div className="workspace-actions">
+            <button type="button" className="ghost-action">
+              Exportar
+            </button>
+            <button type="button" className="solid-action">
+              Nuevo flujo
+            </button>
+          </div>
+        </div>
+
+        <div className="workspace-layout">
+          <aside className="workspace-sidebar">
+            <div className="sidebar-block">
+              <span className="sidebar-label">Navegacion</span>
+              <button type="button" className="sidebar-item active">
+                Overview
+              </button>
+              <button type="button" className="sidebar-item">
+                Infraestructura
+              </button>
+              <button type="button" className="sidebar-item">
+                Base de datos
+              </button>
+              <button type="button" className="sidebar-item">
+                Usuarios
+              </button>
+              <button type="button" className="sidebar-item">
+                Seguridad
+              </button>
+            </div>
+
+            <div className="sidebar-block">
+              <span className="sidebar-label">Salud del sistema</span>
+              <div className="status-stack">
+                <div className="status-card ok">
+                  <strong>Cloud</strong>
+                  <span>Operando normal</span>
+                </div>
+                <div className="status-card warn">
+                  <strong>Data</strong>
+                  <span>Replica con latencia</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <div className="workspace-main">
+            <div className="workspace-kpis">
+              {workspaceStats.map((item) => (
+                <article key={item.label} className="kpi-card">
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                  <small>{item.trend} vs ayer</small>
+                </article>
+              ))}
+            </div>
+
+            <div className="workspace-grid">
+              <section className="board-card board-card-large">
+                <div className="board-head">
+                  <div>
+                    <p className="board-label">Pipeline</p>
+                    <h3>Flujos prioritarios</h3>
+                  </div>
+                  <span className="board-chip">Live sync</span>
+                </div>
+
+                <div className="pipeline-list">
+                  {pipelines.map((item) => (
+                    <article key={item.name} className="pipeline-row">
+                      <div className="pipeline-copy">
+                        <strong>{item.name}</strong>
+                        <span>
+                          {item.owner} · {item.status}
+                        </span>
+                      </div>
+                      <div className="progress-wrap" aria-label={item.name}>
+                        <div className="progress-track">
+                          <span style={{ width: `${item.progress}%` }} />
+                        </div>
+                        <small>{item.progress}%</small>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section className="board-card">
+                <div className="board-head">
+                  <div>
+                    <p className="board-label">Accesos</p>
+                    <h3>Usuarios activos</h3>
+                  </div>
+                  <UsersIcon />
+                </div>
+                <div className="user-cluster" aria-hidden="true">
+                  <span>AL</span>
+                  <span>MR</span>
+                  <span>JP</span>
+                  <span>DV</span>
+                </div>
+                <p className="board-note">
+                  Roles auditados, sesiones activas y permisos listos para
+                  aprobacion.
+                </p>
+              </section>
+
+              <section className="board-card">
+                <div className="board-head">
+                  <div>
+                    <p className="board-label">Storage</p>
+                    <h3>Estado de datos</h3>
+                  </div>
+                  <DatabaseIcon />
+                </div>
+                <div className="storage-bars" aria-hidden="true">
+                  <span style={{ height: "74%" }} />
+                  <span style={{ height: "48%" }} />
+                  <span style={{ height: "82%" }} />
+                  <span style={{ height: "61%" }} />
+                  <span style={{ height: "69%" }} />
+                </div>
+                <p className="board-note">
+                  Replicacion, snapshots y consumo en una sola superficie.
+                </p>
+              </section>
+
+              <section className="board-card board-card-wide">
+                <div className="board-head">
+                  <div>
+                    <p className="board-label">Actividad</p>
+                    <h3>Eventos recientes</h3>
+                  </div>
+                  <MonitorIcon />
+                </div>
+                <ul className="activity-list">
+                  {activity.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            </div>
+          </div>
         </div>
       </section>
 
